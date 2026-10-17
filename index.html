@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Thực hành] CSS | flex-basis Property</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="page-container">
+        <!-- Header -->
+        <header class="header">
+            <h1>Thuộc tính <code>flex-basis</code> trong CSS Flexbox</h1>
+            <p class="subtitle">Thực hành thiết lập kích thước cơ sở ban đầu trên trục chính (Main Axis)</p>
+        </header>
+
+        <!-- Lý thuyết -->
+        <section class="card theory-card">
+            <h2>1. Lý thuyết & Cú pháp</h2>
+            <p>Thuộc tính <code>flex-basis</code> chỉ định kích thước cơ sở ban đầu của Flex Item trên trục chính (main axis) trước khi không gian còn lại được phân phối bởi <code>flex-grow</code> hoặc <code>flex-shrink</code>.</p>
+            <div class="syntax-box">
+                <span class="syntax-label">Cú pháp:</span>
+                <code>flex-wrap: number | auto | initial | inherit;</code>
+            </div>
+            <div class="note-box">
+                <strong>💡 Lưu ý quan trọng:</strong> Trục chính phụ thuộc vào <code>flex-direction</code>:
+                <ul>
+                    <li><code>flex-direction: row</code> (mặc định) &rarr; Main Axis là <strong>chiều ngang</strong> (flex-basis đóng vai trò như width ban đầu).</li>
+                    <li><code>flex-direction: column</code> &rarr; Main Axis là <strong>chiều dọc</strong> (flex-basis đóng vai trò như height ban đầu).</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Ví dụ 1 -->
+        <section class="card" id="vi-du-1">
+            <div class="card-header">
+                <span class="badge badge-blue">Ví dụ 1</span>
+                <h2>Sử dụng flex-basis với đơn vị px (Main Axis chiều ngang)</h2>
+            </div>
+            <p class="desc">Container có <code>flex-direction: row</code> (mặc định). Các item có kích thước cơ sở khác nhau: <strong>200px</strong>, <strong>100px</strong>, <strong>150px</strong>.</p>
+            
+            <div class="demo-box">
+                <div class="container ex1">
+                    <div class="item ex1-item1">Item 1 (200px)</div>
+                    <div class="item ex1-item2">Item 2 (100px)</div>
+                    <div class="item ex1-item3">Item 3 (150px)</div>
+                </div>
+            </div>
+            <div class="code-snippet">
+                <pre><code>.ex1-item1 { flex-basis: 200px; }
+.ex1-item2 { flex-basis: 100px; }
+.ex1-item3 { flex-basis: 150px; }</code></pre>
+            </div>
+        </section>
+
+        <!-- Ví dụ 2 -->
+        <section class="card" id="vi-du-2">
+            <div class="card-header">
+                <span class="badge badge-green">Ví dụ 2</span>
+                <h2>flex-basis thay đổi theo flex-direction: column (Main Axis chiều dọc)</h2>
+            </div>
+            <p class="desc">Khi <code>flex-direction: column</code>, trục chính là chiều dọc nên <code>flex-basis: 100px</code> xác định chiều cao cơ sở của từng phần tử.</p>
+            
+            <div class="demo-box">
+                <div class="container ex2">
+                    <div class="item ex2-item">Item 1 (Cao 100px)</div>
+                    <div class="item ex2-item">Item 2 (Cao 100px)</div>
+                    <div class="item ex2-item">Item 3 (Cao 100px)</div>
+                </div>
+            </div>
+            <div class="code-snippet">
+                <pre><code>.container.ex2 {
+    display: flex;
+    flex-direction: column;
+    height: 380px;
+    gap: 10px;
+}
+.ex2-item {
+    flex-basis: 100px; /* Xác định chiều cao cơ sở */
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- Ví dụ 3 -->
+        <section class="card" id="vi-du-3">
+            <div class="card-header">
+                <span class="badge badge-coral">Ví dụ 3</span>
+                <h2>Sử dụng flex-basis với đơn vị phần trăm (%)</h2>
+            </div>
+            <p class="desc">Thiết lập <code>flex-basis: 50%</code> để mỗi Item chiếm khoảng 50% kích thước trục chính của Container (chia 2 cột đều nhau).</p>
+            
+            <div class="demo-box">
+                <div class="container ex3">
+                    <div class="item ex3-item">Item 1 (50%)</div>
+                    <div class="item ex3-item">Item 2 (50%)</div>
+                </div>
+            </div>
+            <div class="code-snippet">
+                <pre><code>.ex3-item {
+    flex-basis: 50%;
+    box-sizing: border-box;
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- Ví dụ 4 -->
+        <section class="card" id="vi-du-4">
+            <div class="card-header">
+                <span class="badge badge-purple">Ví dụ 4</span>
+                <h2>Kết hợp flex-basis với flex-grow</h2>
+            </div>
+            <p class="desc">Các item đều có kích thước cơ sở ban đầu là <code>100px</code>, phần không gian còn dư trong container (600px) được chia theo tỷ lệ <code>flex-grow</code>: <strong>1 : 2 : 1</strong>.</p>
+            
+            <div class="demo-box">
+                <div class="container ex4">
+                    <div class="item ex4-item1">Item 1 (grow: 1)</div>
+                    <div class="item ex4-item2">Item 2 (grow: 2)</div>
+                    <div class="item ex4-item3">Item 3 (grow: 1)</div>
+                </div>
+            </div>
+            <div class="code-snippet">
+                <pre><code>.container.ex4 { width: 600px; }
+.ex4-item1 { flex-basis: 100px; flex-grow: 1; }
+.ex4-item2 { flex-basis: 100px; flex-grow: 2; /* Nhận gấp đôi khoảng trống */ }
+.ex4-item3 { flex-basis: 100px; flex-grow: 1; }</code></pre>
+            </div>
+        </section>
+
+        <!-- Bảng tổng hợp -->
+        <section class="card">
+            <h2>5. Bảng tổng hợp các giá trị của flex-basis</h2>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Giá trị</th>
+                            <th>Ý nghĩa & Cách hoạt động</th>
+                            <th>Ví dụ thực tế</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>&lt;length&gt;</code> (px, rem, em)</td>
+                            <td>Đặt kích thước cơ sở cố định theo đơn vị độ dài</td>
+                            <td><code>flex-basis: 200px;</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;percentage&gt;</code> (%)</td>
+                            <td>Đặt kích thước cơ sở theo phần trăm chiều dài trục chính của Container</td>
+                            <td><code>flex-basis: 50%;</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>auto</code> (Mặc định)</td>
+                            <td>Lấy theo thuộc tính <code>width</code>/<code>height</code> hoặc kích thước nội dung</td>
+                            <td><code>flex-basis: auto;</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>initial</code></td>
+                            <td>Khôi phục về giá trị mặc định của CSS (tương đương <code>auto</code>)</td>
+                            <td><code>flex-basis: initial;</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>inherit</code></td>
+                            <td>Kế thừa giá trị flex-basis từ phần tử cha</td>
+                            <td><code>flex-basis: inherit;</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Bài thực hành CSS Flexbox | <strong>flex-basis Property</strong></p>
+        </footer>
+    </div>
+</body>
+</html>
